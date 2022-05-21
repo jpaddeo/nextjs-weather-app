@@ -9,29 +9,29 @@ import SettingsReducers, { ACTIONS } from './reducers/SettingsReducers';
 export const SettingContextProvider = ({ children }) => {
   const { getItem, setItem, removeItem } = useStorage();
   const intialSettings = {
-    temperature: getItem('settings.temperature') || 'celsius',
-    speed: getItem('settings.speed') || 'k/h',
+    temperatureUnit: getItem('settings.temperatureUnit') || 'C',
+    speedUnit: getItem('settings.speedUnit') || 'KMH',
     currentLocation: getItem('settings.currentLocation') || null,
   };
 
   const [state, dispatch] = useReducer(SettingsReducers, intialSettings);
 
-  const { temperature, speed, currentLocation } = state;
+  const { temperatureUnit, speedUnit, currentLocation } = state;
 
-  const updateTemperature = (temp) => {
+  const updateTemperatureUnit = (temperatureUnit) => {
     dispatch({
-      type: ACTIONS.UPDATE_TEMPERATURE,
-      temperature: temp,
+      type: ACTIONS.UPDATE_TEMPERATURE_UNIT,
+      temperatureUnit,
     });
-    setItem('settings.temperature', temp);
+    setItem('settings.temperatureUnit', temperatureUnit);
   };
 
-  const updateSpeed = (speed) => {
+  const updateSpeedUnit = (speedUnit) => {
     dispatch({
-      type: ACTIONS.UPDATE_SPEED,
-      speed: speed,
+      type: ACTIONS.UPDATE_SPEED_UNIT,
+      speedUnit,
     });
-    setItem('settings.speed', speed);
+    setItem('settings.speedUnit', speedUnit);
   };
 
   const updateCurrentLocation = (latitude, longitude) => {
@@ -44,8 +44,8 @@ export const SettingContextProvider = ({ children }) => {
   };
 
   const clearSettings = () => {
-    removeItem('settings.temperature');
-    removeItem('settings.speed');
+    removeItem('settings.temperatureUnit');
+    removeItem('settings.speedUnit');
     removeItem('settings.currentLocation');
   };
 
@@ -62,11 +62,11 @@ export const SettingContextProvider = ({ children }) => {
   return (
     <SettingContext.Provider
       value={{
-        temperature,
-        speed,
+        temperatureUnit,
+        speedUnit,
         currentLocation,
-        updateTemperature,
-        updateSpeed,
+        updateTemperatureUnit,
+        updateSpeedUnit,
         updateCurrentLocation,
         clearSettings,
       }}
@@ -75,3 +75,5 @@ export const SettingContextProvider = ({ children }) => {
     </SettingContext.Provider>
   );
 };
+
+export default SettingContext;

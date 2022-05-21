@@ -4,7 +4,8 @@
     "paths": {
       "@/components/*": ["components/*"],
       "@/hooks/*": ["hooks/*"],
-      "@/contexts/*": ["contexts/*"]
+      "@/contexts/*": ["contexts/*"],
+      "@/services/*": ["services/*"]
     }
   },
   "exclude": ["node_modules"]

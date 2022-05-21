@@ -1,17 +1,17 @@
 export const ACTIONS = {
-  UPDATE_TEMPERATURE: 'UPDATE_TEMPERATURE',
-  UPDATE_SPEED: 'UPDATE_SPEED',
+  UPDATE_TEMPERATURE_UNIT: 'UPDATE_TEMPERATURE_UNIT',
+  UPDATE_SPEED_UNIT: 'UPDATE_SPEED_UNIT',
   UPDATE_CURRENT_LOCATION: 'UPDATE_CURRENT_LOCATION',
 };
 
 const ACTIONS_REDUCERS = {
-  [ACTIONS.UPDATE_TEMPERATURE]: (state, action) => ({
+  [ACTIONS.UPDATE_TEMPERATURE_UNIT]: (state, action) => ({
     ...state,
-    temperature: action.payload,
+    temperatureUnit: action.payload,
   }),
-  [ACTIONS.UPDATE_SPEED]: (state, action) => ({
+  [ACTIONS.UPDATE_SPEED_UNIT]: (state, action) => ({
     ...state,
-    speed: action.payload,
+    speedUnit: action.payload,
   }),
   [ACTIONS.UPDATE_CURRENT_LOCATION]: (state, action) => ({
     ...state,
