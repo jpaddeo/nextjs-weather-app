@@ -2,13 +2,13 @@ import 'swiper/css';
 
 import '../styles/globals.css';
 
-import { SettingContextProvider } from '@/contexts/SettingsContext';
+import { SettingsContextProvider } from '@/contexts/SettingsContext';
 
 function WeatherApp({ Component, pageProps }) {
   return (
-    <SettingContextProvider>
+    <SettingsContextProvider>
       <Component {...pageProps} />
-    </SettingContextProvider>
+    </SettingsContextProvider>
   );
 }
 

@@ -2,11 +2,11 @@ import { createContext, useReducer, useEffect } from 'react';
 
 import useStorage from '@/hooks/useStorage';
 
-const SettingContext = createContext();
+const SettingsContext = createContext();
 
 import SettingsReducers, { ACTIONS } from './reducers/SettingsReducers';
 
-export const SettingContextProvider = ({ children }) => {
+export const SettingsContextProvider = ({ children }) => {
   const { getItem, setItem, removeItem } = useStorage();
   const intialSettings = {
     temperatureUnit: getItem('settings.temperatureUnit') || 'C',
@@ -18,20 +18,20 @@ export const SettingContextProvider = ({ children }) => {
 
   const { temperatureUnit, speedUnit, currentLocation } = state;
 
-  const updateTemperatureUnit = (temperatureUnit) => {
+  const updateTemperatureUnit = (temperature) => {
     dispatch({
       type: ACTIONS.UPDATE_TEMPERATURE_UNIT,
-      temperatureUnit,
+      payload: temperature,
     });
-    setItem('settings.temperatureUnit', temperatureUnit);
+    setItem('settings.temperatureUnit', temperature);
   };
 
-  const updateSpeedUnit = (speedUnit) => {
+  const updateSpeedUnit = (speed) => {
     dispatch({
       type: ACTIONS.UPDATE_SPEED_UNIT,
-      speedUnit,
+      payload: speed,
     });
-    setItem('settings.speedUnit', speedUnit);
+    setItem('settings.speedUnit', speed);
   };
 
   const updateCurrentLocation = (latitude, longitude) => {
@@ -57,10 +57,10 @@ export const SettingContextProvider = ({ children }) => {
         updateCurrentLocation(latitude, longitude);
       });
     }
-  }, [updateCurrentLocation]);
+  }, []);
 
   return (
-    <SettingContext.Provider
+    <SettingsContext.Provider
       value={{
         temperatureUnit,
         speedUnit,
@@ -72,8 +72,8 @@ export const SettingContextProvider = ({ children }) => {
       }}
     >
       {children}
-    </SettingContext.Provider>
+    </SettingsContext.Provider>
   );
 };
 
-export default SettingContext;
+export default SettingsContext;

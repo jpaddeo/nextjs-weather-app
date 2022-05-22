@@ -15,11 +15,15 @@ import SettingsContext from '@/contexts/SettingsContext';
 import { useTranslation } from '@/hooks/useTranslation';
 
 import HourCard from '@/components/HourCard';
+import TemperatureUnitSelector from '@/components/General/TemperatureUnitSelector';
+import SpeedUnitSelector from '@/components/General/SpeedUnitSelector';
 
 const TodayCard = ({ weatherData }) => {
   const i18n = useTranslation();
   const { temperatureUnit, speedUnit } = useContext(SettingsContext);
 
+  console.log("A");
+  
   const {
     location,
     icon,
@@ -52,14 +56,14 @@ const TodayCard = ({ weatherData }) => {
       </div>
       <div className='flex text-white'>
         <h1 className='text-8xl font-thin'>{temperature[temperatureUnit]}</h1>
-        <span className='relative mt-3 text-2xl'>&deg;{temperatureUnit}</span>
+        <TemperatureUnitSelector />
       </div>
       <div className='flex flex-col space-x-1'>
         <p className='flex items-center justify-center text-gray-400'>
           {name}, {country}
           <a
             href={`https://maps.google.com/?q=${lat},${lon}`}
-            noreferrer
+            noreferrer='true'
             noopener='true'
             target='_blank'
             className='ml-2 text-gray-400'
@@ -78,29 +82,17 @@ const TodayCard = ({ weatherData }) => {
           </p>
         </div>
       </div>
-      <div className='grid w-full grid-flow-col grid-rows-3 gap-4'>
-        <div className='row-span-3'>
-          <div className='flex h-full w-full flex-row items-center justify-between space-x-2 rounded-lg bg-white p-4 text-gray-500 shadow-md'>
-            <BiWind className='h-6 w-7 text-black' />
-            <div className='flex flex-col items-center justify-center'>
-              <span className='uppercase text-gray-400'>{i18n.WIND}</span>
-              <span className='font-semibold text-gray-800'>
-                {wind[speedUnit]} {speedUnit}
-              </span>
-            </div>
-          </div>
-        </div>
-        <div className='col-span-2'>02</div>
-        <div className='col-span-2 row-span-2'>03</div>
-      </div>
       <div className='grid grid-cols-3 gap-2'>
         <div className='flex flex-row items-center justify-between space-x-2 rounded-lg bg-white p-4 text-gray-500 shadow-md'>
           <BiWind className='h-6 w-6 text-black' />
           <div className='flex flex-col items-center justify-center'>
             <span className='text-xs uppercase text-gray-400'>{i18n.WIND}</span>
-            <span className='font-semibold text-gray-800'>
-              {wind[speedUnit]} {speedUnit}
-            </span>
+            <div className='flex flex-row items-center space-x-1'>
+              <span className='font-semibold text-gray-800'>
+                {wind[speedUnit]}
+              </span>
+              <SpeedUnitSelector />
+            </div>
           </div>
         </div>
         <div className='flex flex-row items-center justify-between space-x-2 rounded-lg bg-white p-4 text-gray-500 shadow-md'>
@@ -120,17 +112,6 @@ const TodayCard = ({ weatherData }) => {
           </div>
         </div>
       </div>
-      <Swiper
-        slidesPerView={5}
-        spaceBetween={10}
-        className='h-full w-full px-2'
-      >
-        {hours.map((hour) => (
-          <SwiperSlide key={hour.timeEpoch}>
-            <HourCard hour={hour} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
     </div>
   );
 };

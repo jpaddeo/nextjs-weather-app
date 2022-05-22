@@ -77,6 +77,14 @@ const parseWeatherData = (data) => {
     //next,
   };
 };
+export const getWeatherConditionsData = async () => {
+  const weatherConditionsRes = await fetch(
+    `https://www.weatherapi.com/docs/weather_conditions.json`
+  );
+  const weatherConditions = await weatherConditionsRes.json();
+  return weatherConditions;
+};
+
 export const getWeatherData = async (city) => {
   const options = {
     method: 'GET',
@@ -85,16 +93,16 @@ export const getWeatherData = async (city) => {
       'X-RapidAPI-Key': `${process.env.RAPIDAPI_KEY}`,
     },
   };
-  const weahterRes = await fetch(
+  const weatherRes = await fetch(
     `https://weatherapi-com.p.rapidapi.com/forecast.json?q=${
       city ? city : 'Buenos%20Aires'
     }&days=${process.env.RAPIDAPI_DAYS}`,
     options
   );
-  const weatherData = await weahterRes.json();
+  const weatherData = await weatherRes.json();
   return parseWeatherData(weatherData);
 };
-export const getLocalWeatherData = async () => {
+export const getLocalWeatherData = () => {
   const weatherData = require('../forecast.sample.json');
   return parseWeatherData(weatherData);
 };

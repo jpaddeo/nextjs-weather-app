@@ -4,6 +4,6 @@ export default {
   SUNSET: 'sunset',
   HUMIDITY: 'humidity',
   WIND: 'wind',
-  UV: 'index uv',
+  UV: 'uv index',
   TEMPERATURE: 'temperature',
 };

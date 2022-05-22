@@ -5,8 +5,9 @@ const nextConfig = {
     domains: ['cdn.weatherapi.com'],
   },
   i18n: {
+    localeDetection: true,
     locales: ['en', 'es'],
-    defaultLocale: 'es',
+    defaultLocale: 'en',
   },
 };
 
