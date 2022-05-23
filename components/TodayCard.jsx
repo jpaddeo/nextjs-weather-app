@@ -10,6 +10,8 @@ import { BiWind } from 'react-icons/bi';
 import { BsSun } from 'react-icons/bs';
 import { IoWaterOutline } from 'react-icons/io5';
 
+import { motion } from 'framer-motion';
+
 import SettingsContext from '@/contexts/SettingsContext';
 
 import { useTranslation } from '@/hooks/useTranslation';
@@ -52,10 +54,14 @@ const TodayCard = ({ weatherData }) => {
           </span>
         </div>
       </div>
-      <div className='flex text-white'>
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1, transition: { duration: 0.5 } }}
+        className='flex text-white'
+      >
         <h1 className='text-8xl font-thin'>{temperature[temperatureUnit]}</h1>
         <TemperatureUnitSelector />
-      </div>
+      </motion.div>
       <div className='flex flex-col space-x-1'>
         <p className='flex items-center justify-center text-gray-400'>
           {name}, {country}
