@@ -18,10 +18,13 @@ const parseWeatherData = (data) => {
   const { sunrise, sunset, moonrise, moonset } = astro;
   const tomorrowForecast = forecastday[1];
   const { hour: tomorrowHours } = tomorrowForecast;
-  const weatherHours = [...hour, ...tomorrowHours];
-  weatherHours.filter(
+  const weatherHoursAll = [...hour, ...tomorrowHours];
+  const weatherHours = weatherHoursAll.filter(
     (hour) => hour.time_epoch * 1000 >= new Date().getTime()
-  ).length = 24;
+  );
+  if (weatherHours.length > 24) {
+    weatherHours.length = 24;
+  }
   const next = forecastday.map((forecast, index) => {
     if (index > 0) {
       return forecast;
@@ -89,14 +92,14 @@ export const getWeatherData = async (city) => {
   const options = {
     method: 'GET',
     headers: {
-      'X-RapidAPI-Host': `${process.env.RAPIDAPI_HOST}`,
-      'X-RapidAPI-Key': `${process.env.RAPIDAPI_KEY}`,
+      'X-RapidAPI-Host': `${process.env.NEXT_PUBLIC_RAPIDAPI_HOST}`,
+      'X-RapidAPI-Key': `${process.env.NEXT_PUBLIC_RAPIDAPI_KEY}`,
     },
   };
   const weatherRes = await fetch(
     `https://weatherapi-com.p.rapidapi.com/forecast.json?q=${
       city ? city : 'Buenos%20Aires'
-    }&days=${process.env.RAPIDAPI_DAYS}`,
+    }&days=${process.env.NEXT_PUBLIC_RAPIDAPI_DAYS}`,
     options
   );
   const weatherData = await weatherRes.json();

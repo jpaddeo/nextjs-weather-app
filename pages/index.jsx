@@ -4,14 +4,22 @@ import TodayCard from '@/components/TodayCard';
 import ForecastCard from '@/components/ForecastCard';
 import Layout from '@/components/Layout';
 
-import { getLocalWeatherData } from '@/services/weather';
+import { getWeatherData, getLocalWeatherData } from '@/services/weather';
 
 export default function Index() {
   const [weatherData, setWeatherData] = useState();
+  const [city, setCity] = useState('London');
 
   useEffect(() => {
-    setWeatherData(getLocalWeatherData());
-  }, []);
+    const fetchData = async () => {
+      const dataFromService = await getWeatherData(city);
+      console.log(dataFromService);
+      setWeatherData(dataFromService);
+    };
+    fetchData().catch((err) => {
+      console.error(err);
+    });
+  }, [city]);
 
   if (!weatherData) return <span>Loading...</span>;
 

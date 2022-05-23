@@ -22,8 +22,6 @@ const TodayCard = ({ weatherData }) => {
   const i18n = useTranslation();
   const { temperatureUnit, speedUnit } = useContext(SettingsContext);
 
-  console.log("A");
-  
   const {
     location,
     icon,
@@ -111,6 +109,29 @@ const TodayCard = ({ weatherData }) => {
             <span className='font-semibold text-gray-800'>{uv}</span>
           </div>
         </div>
+      </div>
+
+      <div className='flex w-1/2 overflow-y-hidden'>
+        {hours.map((hour) => (
+          <div
+            key={hour.timeEpoch}
+            className='mr-2 flex flex-col items-center rounded-md bg-gray-600 p-2 text-white'
+          >
+            <span className='text-center text-sm'>
+              {Intl.DateTimeFormat('default', {
+                hour: 'numeric',
+                minute: 'numeric',
+                hour12: false,
+              }).format(hour.timeEpoch * 1000)}
+            </span>
+            <div className='relative h-10 w-10'>
+              <Image src={hour.icon.url} layout='fill' />
+            </div>
+            <p>
+              {hour.temperature[temperatureUnit]}&deg;{temperatureUnit}
+            </p>
+          </div>
+        ))}
       </div>
     </div>
   );

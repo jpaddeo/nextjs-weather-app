@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  darkMode: 'class',
   reactStrictMode: true,
   images: {
     domains: ['cdn.weatherapi.com'],
