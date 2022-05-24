@@ -12,11 +12,12 @@ export const SettingsContextProvider = ({ children }) => {
     temperatureUnit: getItem('settings.temperatureUnit') || 'C',
     speedUnit: getItem('settings.speedUnit') || 'KMH',
     currentLocation: getItem('settings.currentLocation') || null,
+    theme: getItem('theme') || 'light',
   };
 
   const [state, dispatch] = useReducer(SettingsReducers, intialSettings);
 
-  const { temperatureUnit, speedUnit, currentLocation } = state;
+  const { temperatureUnit, speedUnit, currentLocation, theme } = state;
 
   const updateTemperatureUnit = (temperature) => {
     dispatch({
@@ -38,15 +39,23 @@ export const SettingsContextProvider = ({ children }) => {
     const cLocation = { latitude, longitude };
     dispatch({
       type: ACTIONS.UPDATE_CURRENT_LOCATION,
-      currentLocation: cLocation,
+      payload: cLocation,
     });
     setItem('settings.currentLocation', cLocation);
+  };
+  const updateTheme = (theme) => {
+    dispatch({
+      type: ACTIONS.UPDATE_THEME,
+      payload: theme,
+    });
+    setItem('theme', theme);
   };
 
   const clearSettings = () => {
     removeItem('settings.temperatureUnit');
     removeItem('settings.speedUnit');
     removeItem('settings.currentLocation');
+    setTheme('theme', 'light');
   };
 
   useEffect(() => {
@@ -65,9 +74,11 @@ export const SettingsContextProvider = ({ children }) => {
         temperatureUnit,
         speedUnit,
         currentLocation,
+        theme,
         updateTemperatureUnit,
         updateSpeedUnit,
         updateCurrentLocation,
+        updateTheme,
         clearSettings,
       }}
     >

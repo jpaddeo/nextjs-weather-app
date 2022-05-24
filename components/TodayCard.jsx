@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 
 import Image from 'next/image';
 
@@ -22,7 +22,8 @@ import SpeedUnitSelector from '@/components/General/SpeedUnitSelector';
 
 const TodayCard = ({ weatherData }) => {
   const i18n = useTranslation();
-  const { temperatureUnit, speedUnit } = useContext(SettingsContext);
+  const { temperatureUnit, speedUnit, updateTheme } =
+    useContext(SettingsContext);
 
   const {
     location,
@@ -35,9 +36,14 @@ const TodayCard = ({ weatherData }) => {
     wind,
     hours,
     humidity,
+    isDay,
   } = weatherData.today;
   const { url: iconUrl } = icon;
   const { localtime, name, country, lat, lon } = location;
+
+  useEffect(() => {
+    updateTheme(isDay ? 'light' : 'dark');
+  }, [isDay]);
 
   return (
     <div className='flex flex-col items-center justify-center space-y-2 px-4 py-2'>

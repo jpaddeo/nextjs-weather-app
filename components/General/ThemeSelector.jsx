@@ -1,27 +1,24 @@
-import { useState } from 'react';
-
-import useStorage from '@/hooks/useStorage';
+import { useContext } from 'react';
 
 import { MoonIcon, SunIcon } from '@heroicons/react/outline';
 
+import SettingsContext from '@/contexts/SettingsContext';
+
 export default function ThemeSelector({ className = '' }) {
-  const { getItem, setItem } = useStorage();
-  const [theme, setTheme] = useState(getItem('theme') || 'light');
+  const { theme, updateTheme } = useContext(SettingsContext);
 
   const handleDarkClick = () => {
-    setTheme('dark');
-    setItem('theme', 'dark');
+    updateTheme('dark');
     document.documentElement.classList.add('dark');
   };
 
   const handleLightClick = () => {
-    setTheme('light');
-    setItem('theme', 'light');
+    updateTheme('light');
     document.documentElement.classList.remove('dark');
   };
 
   return (
-    <nav className={`${className} text-white h-7 w-7`}>
+    <nav className={`${className} h-7 w-7 text-white`}>
       <MoonIcon
         className='h-6 w-6 cursor-pointer'
         onClick={handleDarkClick}
