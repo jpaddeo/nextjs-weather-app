@@ -123,7 +123,7 @@ const TodayCard = ({ weatherData }) => {
         </div>
       </div>
 
-      <div className='flex w-1/2 overflow-y-hidden'>
+      <div className='flex w-1/2 overflow-y-hidden scrollbar-thin scrollbar-track-gray-300 scrollbar-thumb-gray-700'>
         {hours.map((hour) => (
           <div
             key={hour.timeEpoch}

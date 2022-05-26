@@ -1,4 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+
+import SettingsContext from '@/contexts/SettingsContext';
 
 import TodayCard from '@/components/TodayCard';
 import ForecastCard from '@/components/ForecastCard';
@@ -8,18 +10,21 @@ import { getWeatherData, getLocalWeatherData } from '@/services/weather';
 
 export default function Index() {
   const [weatherData, setWeatherData] = useState();
-  const [city, setCity] = useState('London');
+  const { currentLocation, updateCurrentLocation } =
+    useContext(SettingsContext);
+  const [city, setCity] = useState(Object.values(currentLocation).join(','));
 
   useEffect(() => {
     const fetchData = async () => {
-      const dataFromService = await getWeatherData(city);
-      console.log(dataFromService);
+      const dataFromService = await getWeatherData(
+        Object.values(currentLocation).join(',')
+      );
       setWeatherData(dataFromService);
     };
     fetchData().catch((err) => {
       console.error(err);
     });
-  }, [city]);
+  }, [currentLocation]);
 
   if (!weatherData) return <span>Loading...</span>;
 
