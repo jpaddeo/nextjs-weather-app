@@ -1,7 +1,6 @@
 import Head from 'next/head';
 
 export default function Home({ weatherData }) {
-  console.log(weatherData);
   const { current, location } = weatherData;
   const {
     condition,

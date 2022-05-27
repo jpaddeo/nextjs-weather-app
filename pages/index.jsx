@@ -3,7 +3,6 @@ import { useState, useEffect, useContext } from 'react';
 import SettingsContext from '@/contexts/SettingsContext';
 
 import TodayCard from '@/components/TodayCard';
-import ForecastCard from '@/components/ForecastCard';
 import Layout from '@/components/Layout';
 
 import { getWeatherData, getLocalWeatherData } from '@/services/weather';
@@ -12,7 +11,6 @@ export default function Index() {
   const [weatherData, setWeatherData] = useState();
   const { currentLocation, updateCurrentLocation } =
     useContext(SettingsContext);
-  const [city, setCity] = useState(Object.values(currentLocation).join(','));
 
   useEffect(() => {
     const fetchData = async () => {

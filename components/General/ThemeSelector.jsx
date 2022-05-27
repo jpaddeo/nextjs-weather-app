@@ -20,14 +20,14 @@ export default function ThemeSelector({ className = '' }) {
   return (
     <nav className={`${className} h-7 w-7 text-white`}>
       <MoonIcon
-        className='h-6 w-6 cursor-pointer'
+        className={`h-6 w-6 cursor-pointer ${theme === 'dark' ? 'hidden' : ''}`}
         onClick={handleDarkClick}
-        hidden={theme === 'dark'}
       />
       <SunIcon
-        className='h-7 w-7 cursor-pointer'
+        className={`h-7 w-7 cursor-pointer ${
+          theme === 'light' ? 'hidden' : ''
+        }`}
         onClick={handleLightClick}
-        hidden={theme === 'light'}
       />
     </nav>
   );

@@ -25,11 +25,26 @@ const parseWeatherData = (data) => {
   if (weatherHours.length > 24) {
     weatherHours.length = 24;
   }
-  const next = forecastday.map((forecast, index) => {
-    if (index > 0) {
-      return forecast;
-    }
-  });
+  const nexts = forecastday
+    .filter((_, index) => index > 0)
+    .map((forecast) => {
+      return {
+        date: forecast.date,
+        dateEpoch: forecast.date_epoch,
+        icon: {
+          code: forecast.day.condition.code,
+          url: `https://${forecast.day.condition.icon}`,
+        },
+        minTemperature: {
+          F: forecast.day.mintemp_f,
+          C: forecast.day.mintemp_c,
+        },
+        maxTemperature: {
+          F: forecast.day.maxtemp_f,
+          C: forecast.day.maxtemp_c,
+        },
+      };
+    });
 
   return {
     today: {
@@ -77,7 +92,7 @@ const parseWeatherData = (data) => {
         },
       })),
     },
-    //next,
+    nexts,
   };
 };
 export const getWeatherConditionsData = async () => {
