@@ -1,12 +1,11 @@
-import { useState, useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 
 import Image from 'next/image';
 
-import SettingsContext from '@/contexts/SettingsContext';
-
 import { useTranslation } from '@/hooks/useTranslation';
-import TemperatureUnitSelector from '@/components/General/TemperatureUnitSelector';
 import { ExternalLinkIcon } from '@heroicons/react/outline';
+
+import SettingsContext from '@/contexts/SettingsContext';
 
 function Today({ weatherData }) {
   const i18n = useTranslation();
@@ -41,25 +40,24 @@ function Today({ weatherData }) {
           <Image src={iconUrl} layout='fill' />
         </div>
         <h2 className='flex items-center justify-center gap-2 text-4xl text-slate-600 dark:text-white'>
-          {temperature[temperatureUnit]}
-          <TemperatureUnitSelector />
+          {temperature[temperatureUnit]}&deg;
         </h2>
       </div>
       <div className='flex flex-col items-center justify-between gap-2 text-sm uppercase md:flex-row'>
-        <p className=' text-gray-400'>
+        <p className='text-slate-600 dark:text-white'>
           {i18n.SENSACION_TERMICA} {feelsLike[temperatureUnit]}&deg;
           {temperatureUnit}
         </p>
         <hr className='h-1 w-1 rounded-full bg-white text-white' />
-        <p className=' text-gray-400'>
+        <p className='text-slate-600 dark:text-white'>
           {new Intl.DateTimeFormat().format(new Date(localtime))}
         </p>
         <hr className='h-1 w-1 rounded-full bg-white text-white' />
-        <p className=' text-gray-400'>
+        <p className='text-slate-600 dark:text-white'>
           {i18n.SUNRISE} {sunrise}
         </p>
         <hr className='h-1 w-1 rounded-full bg-white text-white' />
-        <p className=' text-gray-400'>
+        <p className='text-slate-600 dark:text-white'>
           {i18n.SUNSET} {sunset}
         </p>
       </div>

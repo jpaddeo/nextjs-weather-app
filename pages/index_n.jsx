@@ -10,6 +10,7 @@ import { getWeatherData } from '@/services/weather';
 import Today from '@/components/Today';
 import Forecast from '@/components/Forecast';
 import NextDays from '@/components/NextDays';
+import TodayDetails from '@/components/TodayDetails';
 
 export default function IndexN() {
   const [weatherData, setWeatherData] = useState();
@@ -42,10 +43,7 @@ export default function IndexN() {
       <Today weatherData={weatherData} />
       <Forecast weatherData={weatherData} />
       <NextDays weatherData={weatherData} />
-      {/* NextDays */}
-      {/* Others */}
-
-      <div className=''></div>
+      <TodayDetails weatherData={weatherData} />
     </Layout>
   );
 }

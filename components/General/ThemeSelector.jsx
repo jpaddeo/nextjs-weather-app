@@ -18,7 +18,7 @@ export default function ThemeSelector({ className = '' }) {
   };
 
   return (
-    <nav className={`${className} h-7 w-7 text-white`}>
+    <nav className={`${className} h-7 w-7 text-slate-600 dark:text-white`}>
       <MoonIcon
         className={`h-6 w-6 cursor-pointer ${theme === 'dark' ? 'hidden' : ''}`}
         onClick={handleDarkClick}
