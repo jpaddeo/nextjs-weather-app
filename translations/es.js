@@ -1,6 +1,6 @@
 export default {
   TODAY: 'hoy',
-  SENSACION_TERMICA: 'st',
+  FEELS_LIKE: 'st',
   SUNSET: 'anochecer',
   SUNRISE: 'amanecer',
   HUMIDITY: 'humedad',

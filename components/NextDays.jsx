@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 import SettingsContext from '@/contexts/SettingsContext';
-import TemperatureBadge from './General/TemperatureBadge';
+import TemperatureBadge from '@/components/General/TemperatureBadge';
 
 function NextDays({ weatherData }) {
   const { temperatureUnit } = useContext(SettingsContext);
@@ -13,7 +13,7 @@ function NextDays({ weatherData }) {
   const { locale } = useRouter();
 
   return (
-    <div className='scrollbar-thumb-rounded-md w-3/4 scroll-px-40 overflow-y-hidden rounded-md bg-slate-500 scrollbar-thin scrollbar-track-gray-300 scrollbar-thumb-gray-700'>
+    <div className='w-3/4 scroll-px-40 rounded-md bg-slate-500'>
       <div className='flex flex-col items-center justify-center gap-2 p-5'>
         {nexts.map((next) => (
           <div

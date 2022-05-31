@@ -1,6 +1,6 @@
 export default {
   TODAY: 'today',
-  SENSACION_TERMICA: 'feels like',
+  FEELS_LIKE: 'feels like',
   SUNSET: 'sunset',
   SUNRISE: 'sunrise',
   HUMIDITY: 'humidity',

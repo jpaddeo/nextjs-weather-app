@@ -7,28 +7,30 @@ import Layout from '@/components/Layout';
 import { useTranslation } from '@/hooks/useTranslation';
 
 import { getWeatherData } from '@/services/weather';
+
 import Today from '@/components/Today';
 import Forecast from '@/components/Forecast';
 import NextDays from '@/components/NextDays';
 import TodayDetails from '@/components/TodayDetails';
 
+import WeatherContext from '@/contexts/WeatherContext';
+
 export default function IndexN() {
   const [weatherData, setWeatherData] = useState();
-  const { currentLocation, updateCurrentLocation } =
-    useContext(SettingsContext);
+  const { location, updateLocation } = useContext(WeatherContext);
   const i18n = useTranslation();
 
   useEffect(() => {
     const fetchData = async () => {
       const dataFromService = await getWeatherData(
-        Object.values(currentLocation).join(',')
+        Object.values(location).join(',')
       );
       setWeatherData(dataFromService);
     };
     fetchData().catch((err) => {
       console.error(err);
     });
-  }, [currentLocation]);
+  }, [location]);
 
   if (!weatherData) {
     return (

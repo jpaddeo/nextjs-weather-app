@@ -120,6 +120,7 @@ export const getWeatherData = async (city) => {
   const weatherData = await weatherRes.json();
   return parseWeatherData(weatherData);
 };
+
 export const getLocalWeatherData = () => {
   const weatherData = require('../forecast.sample.json');
   return parseWeatherData(weatherData);

@@ -83,7 +83,7 @@ const TodayCard = ({ weatherData }) => {
         </p>
         <div className='flex items-center justify-between space-x-2 text-sm uppercase'>
           <p className=' text-gray-400'>
-            {i18n.SENSACION_TERMICA} {feelsLike[temperatureUnit]}&deg;
+            {i18n.FEELS_LIKE} {feelsLike[temperatureUnit]}&deg;
             {temperatureUnit}
           </p>
           <hr className='h-1 w-1 rounded-full bg-white text-white' />

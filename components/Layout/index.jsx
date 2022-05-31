@@ -14,7 +14,7 @@ export default function Layout({ title = 'miduweather', children }) {
 
   return (
     <div
-      className={`mx-auto flex h-screen w-screen flex-col items-center justify-center space-y-8 rounded-3xl ${
+      className={`rounded-4xl mx-auto flex h-screen w-screen max-w-3xl flex-col items-center justify-center space-y-8 ${
         theme === 'light'
           ? 'bg-gradient-to-r from-green-300 via-blue-500 to-purple-600'
           : 'bg-gradient-to-r from-gray-700 via-gray-900 to-black'

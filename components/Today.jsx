@@ -3,7 +3,7 @@ import { useContext, useEffect } from 'react';
 import Image from 'next/image';
 
 import { useTranslation } from '@/hooks/useTranslation';
-import { ExternalLinkIcon } from '@heroicons/react/outline';
+import { ExternalLinkIcon, ChevronDownIcon } from '@heroicons/react/outline';
 
 import SettingsContext from '@/contexts/SettingsContext';
 
@@ -25,15 +25,18 @@ function Today({ weatherData }) {
     <div className='flex flex-col items-center justify-center'>
       <p className='flex items-center justify-center text-4xl text-slate-600 dark:text-white'>
         {name}
-        <a
-          href={`https://maps.google.com/?q=${lat},${lon}`}
-          noreferrer='true'
-          noopener='true'
-          target='_blank'
-          className='ml-2 text-gray-400'
-        >
-          <ExternalLinkIcon className='h-4 w-4' />
-        </a>
+        <div className='flex flex-row items-center justify-center space-x-2'>
+          <a
+            href={`https://maps.google.com/?q=${lat},${lon}`}
+            noreferrer='true'
+            noopener='true'
+            target='_blank'
+            className='ml-2 text-gray-400'
+          >
+            <ExternalLinkIcon className='h-4 w-4' />
+          </a>
+          <ChevronDownIcon className='h-4 w-4' />
+        </div>
       </p>
       <div className='flex items-center justify-center gap-2'>
         <div className='relative h-16 w-16'>
@@ -45,7 +48,7 @@ function Today({ weatherData }) {
       </div>
       <div className='flex flex-col items-center justify-between gap-2 text-sm uppercase md:flex-row'>
         <p className='text-slate-600 dark:text-white'>
-          {i18n.SENSACION_TERMICA} {feelsLike[temperatureUnit]}&deg;
+          {i18n.FEELS_LIKE} {feelsLike[temperatureUnit]}&deg;
           {temperatureUnit}
         </p>
         <hr className='h-1 w-1 rounded-full bg-white text-white' />
