@@ -1,10 +1,9 @@
-import { useContext } from 'react';
 import Image from 'next/image';
 
-import SettingContext from '@/contexts/SettingsContext';
+import { useSettings } from '@/hooks/useSettings';
 
 const HourCard = ({ hour }) => {
-  const { temperatureUnit } = useContext(SettingContext);
+  const { temperatureUnit } = useSettings();
   const { time, temperature, icon } = hour;
   const { url: iconUrl } = icon;
   const [pDate, pTime] = time.split(' ');

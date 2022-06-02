@@ -1,11 +1,9 @@
-import { useContext } from 'react';
-
 import { MoonIcon, SunIcon } from '@heroicons/react/outline';
 
-import SettingsContext from '@/contexts/SettingsContext';
+import { useSettings } from '@/hooks/useSettings';
 
 export default function ThemeSelector({ className = '' }) {
-  const { theme, updateTheme } = useContext(SettingsContext);
+  const { theme, updateTheme } = useSettings();
 
   const handleDarkClick = () => {
     updateTheme('dark');

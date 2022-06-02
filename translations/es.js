@@ -8,4 +8,5 @@ export default {
   UV: 'índice uv',
   TEMPERATURE: 'temperatura',
   LOADING: 'cargando...',
+  SEARCH_SELECT_CITY: 'buscar o seleccionar ciudad',
 };

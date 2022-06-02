@@ -1,52 +1,49 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 
-import SettingsContext from '@/contexts/SettingsContext';
-
-import TodayCard from '@/components/TodayCard';
 import Layout from '@/components/Layout';
 
-import { getWeatherData, getLocalWeatherData } from '@/services/weather';
+import { useTranslation } from '@/hooks/useTranslation';
 
-export default function Index() {
+import { getWeatherData } from '@/services/weather';
+
+import Today from '@/components/Today';
+import Forecast from '@/components/Forecast';
+import NextDays from '@/components/NextDays';
+import TodayDetails from '@/components/TodayDetails';
+
+import WeatherContext from '@/contexts/WeatherContext';
+
+export default function IndexN() {
   const [weatherData, setWeatherData] = useState();
-  const { currentLocation, updateCurrentLocation } =
-    useContext(SettingsContext);
+  const { location, updateLocation } = useContext(WeatherContext);
+  const i18n = useTranslation();
 
   useEffect(() => {
     const fetchData = async () => {
       const dataFromService = await getWeatherData(
-        Object.values(currentLocation).join(',')
+        Object.values(location).join(',')
       );
       setWeatherData(dataFromService);
     };
     fetchData().catch((err) => {
       console.error(err);
     });
-  }, [currentLocation]);
+  }, [location]);
 
-  if (!weatherData) return <span>Loading...</span>;
+  if (!weatherData) {
+    return (
+      <Layout>
+        <h1 className='dark:text-white'>{i18n.LOADING}</h1>
+      </Layout>
+    );
+  }
 
   return (
-    <Layout>
-      <TodayCard weatherData={weatherData} />
-      {/*}
-      {forecast.forecastday.map((forecast, index) => {
-        if (index > 0) {
-          return <ForecastCard key={index} forecast={forecast} />;
-        }
-      })}
-      */}
+    <Layout weatherData={weatherData}>
+      <Today weatherData={weatherData} />
+      <Forecast weatherData={weatherData} />
+      <NextDays weatherData={weatherData} />
+      <TodayDetails weatherData={weatherData} />
     </Layout>
   );
 }
-
-/*
-export async function getServerSideProps(context) {
-  const weatherData = await getLocalWeatherData();
-  return {
-    props: {
-      weatherData,
-    },
-  };
-}
-*/

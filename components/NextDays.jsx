@@ -1,13 +1,11 @@
-import { useContext } from 'react';
-
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
-import SettingsContext from '@/contexts/SettingsContext';
 import TemperatureBadge from '@/components/General/TemperatureBadge';
+import { useSettings } from '@/hooks/useSettings';
 
 function NextDays({ weatherData }) {
-  const { temperatureUnit } = useContext(SettingsContext);
+  const { temperatureUnit } = useSettings();
   const nexts = weatherData.nexts;
 
   const { locale } = useRouter();

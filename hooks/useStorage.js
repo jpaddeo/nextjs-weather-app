@@ -1,4 +1,4 @@
-export default function useStorage(driver) {
+export const useStorage = (driver) => {
   if (!driver && typeof window !== 'undefined') {
     driver = window.localStorage;
   }
@@ -27,4 +27,4 @@ export default function useStorage(driver) {
     setItem,
     removeItem,
   };
-}
+};

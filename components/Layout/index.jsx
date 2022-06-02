@@ -1,21 +1,28 @@
-import { useContext } from 'react';
-
 import Head from 'next/head';
 
-import BottomNavBar from '@/components/Layout/BottomNavBar';
 import ThemeSelector from '@/components/General/ThemeSelector';
 import TranslationSelector from '@/components/General/TranslationSelector';
 import TemperatureUnitSelector from '@/components/General/TemperatureUnitSelector';
+import LocationSelector from '@/components/General/LocationSelector';
 
-import SettingsContext from '@/contexts/SettingsContext';
+import { useSettings } from '@/hooks/useSettings';
 
-export default function Layout({ title = 'miduweather', children }) {
-  const { theme } = useContext(SettingsContext);
+export default function Layout({
+  title = 'miduweather',
+  weatherData,
+  children,
+}) {
+  const { theme } = useSettings();
+  if (!weatherData) {
+    return null;
+  }
+
+  const { isDay } = weatherData?.today;
 
   return (
     <div
       className={`rounded-4xl mx-auto flex h-screen w-screen max-w-3xl flex-col items-center justify-center space-y-8 ${
-        theme === 'light'
+        isDay === 1 && theme !== 'dark'
           ? 'bg-gradient-to-r from-green-300 via-blue-500 to-purple-600'
           : 'bg-gradient-to-r from-gray-700 via-gray-900 to-black'
       }`}
@@ -27,6 +34,7 @@ export default function Layout({ title = 'miduweather', children }) {
       </Head>
       <div className='flex h-12 w-full flex-row items-center justify-end space-x-4 px-8'>
         <ThemeSelector />
+        <LocationSelector />
         <TranslationSelector />
         <TemperatureUnitSelector />
       </div>

@@ -1,6 +1,6 @@
 import { createContext, useReducer, useEffect } from 'react';
 
-import useStorage from '@/hooks/useStorage';
+import { useStorage } from '@/hooks/useStorage';
 
 const SettingsContext = createContext();
 
@@ -12,11 +12,12 @@ export const SettingsContextProvider = ({ children }) => {
     temperatureUnit: getItem('settings.temperatureUnit') || 'C',
     speedUnit: getItem('settings.speedUnit') || 'KMH',
     theme: getItem('settings.theme') || 'light',
+    locationSelectorOpen: false,
   };
 
   const [state, dispatch] = useReducer(SettingsReducers, intialSettings);
 
-  const { temperatureUnit, speedUnit, theme } = state;
+  const { temperatureUnit, speedUnit, theme, locationSelectorOpen } = state;
 
   const updateTemperatureUnit = (temperature) => {
     dispatch({
@@ -42,10 +43,17 @@ export const SettingsContextProvider = ({ children }) => {
     setItem('settings.theme', theme);
   };
 
+  const updateLocationSelectorOpen = (locationSelectorOpen) => {
+    dispatch({
+      type: ACTIONS.UPDATE_LOCATION_SELECTOR_OPEN,
+      payload: locationSelectorOpen,
+    });
+  };
+
   const clearSettings = () => {
     removeItem('settings.temperatureUnit');
     removeItem('settings.speedUnit');
-    setTheme('settings.theme', 'light');
+    removeItem('settings.theme');
   };
 
   return (
@@ -54,9 +62,11 @@ export const SettingsContextProvider = ({ children }) => {
         temperatureUnit,
         speedUnit,
         theme,
+        locationSelectorOpen,
         updateTemperatureUnit,
         updateSpeedUnit,
         updateTheme,
+        updateLocationSelectorOpen,
         clearSettings,
       }}
     >

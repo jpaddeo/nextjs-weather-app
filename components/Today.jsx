@@ -1,25 +1,18 @@
-import { useContext, useEffect } from 'react';
-
 import Image from 'next/image';
 
 import { useTranslation } from '@/hooks/useTranslation';
 import { ExternalLinkIcon, ChevronDownIcon } from '@heroicons/react/outline';
 
-import SettingsContext from '@/contexts/SettingsContext';
+import { useSettings } from '@/hooks/useSettings';
 
 function Today({ weatherData }) {
   const i18n = useTranslation();
-  const { temperatureUnit, speedUnit, updateTheme } =
-    useContext(SettingsContext);
+  const { temperatureUnit, updateLocationSelectorOpen } = useSettings();
 
-  const { location, icon, temperature, feelsLike, sunrise, sunset, isDay } =
+  const { location, icon, temperature, feelsLike, sunrise, sunset } =
     weatherData.today;
   const { url: iconUrl } = icon;
   const { localtime, name, lat, lon } = location;
-
-  useEffect(() => {
-    updateTheme(isDay ? 'light' : 'dark');
-  }, [isDay]);
 
   return (
     <div className='flex flex-col items-center justify-center'>
@@ -35,7 +28,10 @@ function Today({ weatherData }) {
           >
             <ExternalLinkIcon className='h-4 w-4' />
           </a>
-          <ChevronDownIcon className='h-4 w-4' />
+          <ChevronDownIcon
+            className='h-4 w-4'
+            onClick={() => updateLocationSelectorOpen(true)}
+          />
         </div>
       </p>
       <div className='flex items-center justify-center gap-2'>

@@ -1,9 +1,7 @@
-import { useContext } from 'react';
-
-import SettingsContext from '@/contexts/SettingsContext';
+import { useSettings } from '@/hooks/useSettings';
 
 export default function SpeedUnitSelector() {
-  const { speedUnit, updateSpeedUnit } = useContext(SettingsContext);
+  const { speedUnit, updateSpeedUnit } = useSettings();
   return (
     <div className='flex flex-col justify-center text-xs font-semibold uppercase'>
       <span

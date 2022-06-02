@@ -2,6 +2,7 @@ export const ACTIONS = {
   UPDATE_TEMPERATURE_UNIT: 'UPDATE_TEMPERATURE_UNIT',
   UPDATE_SPEED_UNIT: 'UPDATE_SPEED_UNIT',
   UPDATE_THEME: 'UPDATE_THEME',
+  UPDATE_LOCATION_SELECTOR_OPEN: 'UPDATE_LOCATION_SELECTOR_OPEN',
 };
 
 const ACTIONS_REDUCERS = {
@@ -16,6 +17,10 @@ const ACTIONS_REDUCERS = {
   [ACTIONS.UPDATE_THEME]: (state, action) => ({
     ...state,
     theme: action.payload,
+  }),
+  [ACTIONS.UPDATE_LOCATION_SELECTOR_OPEN]: (state, action) => ({
+    ...state,
+    locationSelectorOpen: action.payload,
   }),
 };
 

@@ -1,10 +1,8 @@
-import { useContext } from 'react';
-
-import SettingsContext from '@/contexts/SettingsContext';
+import { useSettings } from '@/hooks/useSettings';
 
 export default function TemperatureUnitSelector() {
-  const { temperatureUnit, updateTemperatureUnit } =
-    useContext(SettingsContext);
+  const { temperatureUnit, updateTemperatureUnit } = useSettings();
+  
   return (
     <div className='flex flex-row justify-center space-x-2 text-slate-600 dark:text-white'>
       <span
